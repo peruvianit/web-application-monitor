@@ -1,8 +1,15 @@
 package io.peruvianit.monitor.service;
 
-import io.peruvianit.monitor.dto.DashboardDto;
+import java.util.List;
+
+import io.peruvianit.monitor.dto.LogDto;
+import io.peruvianit.monitor.dto.ThreadMxDto;
 import io.peruvianit.monitor.error.exception.FileUtilsException;
 
 public interface MonitorService {
-	DashboardDto loadDashboard(String webServerPathLog) throws FileUtilsException;
+	
+	ThreadMxDto loadThreadsMx();
+	
+	List<LogDto> loadLogs(String webServerPathLog) throws FileUtilsException;
+	
 }

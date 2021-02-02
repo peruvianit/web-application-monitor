@@ -75,6 +75,7 @@ public class ThreadSystemMonitor {
 					theadInfoBean.setStateThread(StateThread.TERMINATED);
 					break;
 				default:
+					theadInfoBean.setStateThread(StateThread.WITHOUT_STATE);
 					break;
 				}
 				for (MonitorInfo mi : ti.getLockedMonitors()) {
@@ -152,6 +153,7 @@ public class ThreadSystemMonitor {
 	    	threadInfoFullBean.setStateThread(StateThread.TERMINATED);
 	    	break;
 		  default:
+			threadInfoFullBean.setStateThread(StateThread.WITHOUT_STATE);
 			break;
 	    } 
 	    

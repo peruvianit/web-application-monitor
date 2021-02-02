@@ -5,6 +5,7 @@ package io.peruvianit.monitor.dto;
 
 import java.time.LocalDateTime;
 
+import io.peruvianit.monitor.util.DateUtils;
 import io.peruvianit.monitor.util.FileUtils;
 
 /**
@@ -15,9 +16,9 @@ public class LogDto {
 
 	private String pathNameFile;
 	private String size;
-	private LocalDateTime lastDateModified;
+	private String lastDateModified;
 	
-	private LogDto(String pathNameFile, String size, LocalDateTime lastDateModified) {
+	private LogDto(String pathNameFile, String size, String lastDateModified) {
 		super();
 		this.pathNameFile = pathNameFile;
 		this.size = size;
@@ -25,7 +26,9 @@ public class LogDto {
 	}
 	
 	public static LogDto crea(String pathNameFile, Long size, LocalDateTime lastDateModified) {
-		return new LogDto(pathNameFile, FileUtils.getStringSizeLengthFile(size), lastDateModified);
+		return new LogDto(pathNameFile, 
+				FileUtils.getStringSizeLengthFile(size), 
+				DateUtils.convertLocalDateTimeToString.apply(lastDateModified));
 	}
 
 	public String getPathNameFile() {
@@ -36,7 +39,7 @@ public class LogDto {
 		return size;
 	}
 
-	public LocalDateTime getLastDateModified() {
+	public String getLastDateModified() {
 		return lastDateModified;
 	}
 }

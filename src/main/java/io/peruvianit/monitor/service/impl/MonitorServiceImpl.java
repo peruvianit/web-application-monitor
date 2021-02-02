@@ -7,6 +7,7 @@ import java.io.File;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,15 +16,14 @@ import org.springframework.stereotype.Service;
 
 import io.peruvianit.monitor.agent.ThreadSystemMonitor;
 import io.peruvianit.monitor.agent.bean.ThreadInfoFullBean;
-import io.peruvianit.monitor.dto.DashboardDto;
-import io.peruvianit.monitor.dto.DashboardDto.ThreadMxDashboard;
 import io.peruvianit.monitor.dto.DonutGraphic;
 import io.peruvianit.monitor.dto.LogDto;
-import io.peruvianit.monitor.dto.SommarioDto;
 import io.peruvianit.monitor.dto.ThreadDto;
+import io.peruvianit.monitor.dto.ThreadMxDto;
 import io.peruvianit.monitor.enums.StateThread;
 import io.peruvianit.monitor.error.exception.FileUtilsException;
 import io.peruvianit.monitor.service.MonitorService;
+import io.peruvianit.monitor.util.DateUtils;
 import io.peruvianit.monitor.util.FileUtils;
 
 /**
@@ -33,18 +33,14 @@ import io.peruvianit.monitor.util.FileUtils;
 @Service
 public class MonitorServiceImpl implements MonitorService {
 
-	private static String LABEL_DAEMON = "Daemon";
-	private static String LABEL_NOT_DAEMON = "Not Daemon";
+	private static String LABEL_DAEMON = "DAEMON";
+	private static String LABEL_NOT_DAEMON = "NOT_DAEMON";
 	
 	@Override
-	public DashboardDto loadDashboard(String webServerPathLog) throws FileUtilsException {
+	public ThreadMxDto loadThreadsMx() {
 		List<ThreadInfoFullBean> theadInfoFullBeans = ThreadSystemMonitor.dumpStack();
 		
-		DashboardDto dashboardDto = new DashboardDto();
-		
 		int totalThread = theadInfoFullBeans.size();
-		
-		dashboardDto.setTotalThread(totalThread);
 		
 		// Analyzer Threads
 		
@@ -78,47 +74,47 @@ public class MonitorServiceImpl implements MonitorService {
 
 		// create list threads 
 		
-		ThreadMxDashboard threadMxDashboard = new ThreadMxDashboard();
+		ThreadMxDto threadMxDto = new ThreadMxDto();
 		
+		threadMxDto.setTotalThread(totalThread);
+		threadMxDto.setSnapshotTime(DateUtils.convertLocalDateTimeToString.apply(LocalDateTime.now()));
+		threadMxDto.getThreadsInfoFull().addAll(theadInfoFullBeans);
 		for(ThreadDto threadDto : threadDtos.values()) {
-			threadMxDashboard.getThreads().add(threadDto);
+			threadMxDto.getThreads().add(threadDto);
 			
 			// create info ThreadMx
 			int countThread = threadDto.getCount();
-			threadMxDashboard.getThreadMx().add(
-					DonutGraphic.crea(threadDto.getName(), countThread, new Float(countThread*100/totalThread)));
+			threadMxDto.getThreadMx().add(
+					DonutGraphic.crea(threadDto.getName().toUpperCase(), countThread));
 		}
 		
 		// create info Daemon
 		
 		int countNotDeamon = totalThread - countDaemon;
-		Float percentualeDeamon = new Float(countDaemon*100/totalThread);
 		
-		threadMxDashboard.getDaemons().add(
-				DonutGraphic.crea(LABEL_DAEMON, countDaemon, percentualeDeamon));
-		threadMxDashboard.getDaemons().add(
-				DonutGraphic.crea(LABEL_NOT_DAEMON, countNotDeamon, 100L - percentualeDeamon ));
+		threadMxDto.getDaemons().add(
+				DonutGraphic.crea(LABEL_DAEMON, countDaemon));
+		threadMxDto.getDaemons().add(
+				DonutGraphic.crea(LABEL_NOT_DAEMON, countNotDeamon));
 		
-		dashboardDto.setThreadMxDashboard(threadMxDashboard);
+		return threadMxDto;
 		
-		// Load files log
+	}
+
+	@Override
+	public List<LogDto> loadLogs(String webServerPathLog) throws FileUtilsException {
+		
+		List<LogDto> logDtos = new ArrayList<>();
 		
 		List<File> logFiles = FileUtils.listFile(webServerPathLog);
 		
 		for (File file : logFiles) {
 			LocalDateTime lastModified =
 				    LocalDateTime.ofInstant(Instant.ofEpochMilli(file.lastModified()), ZoneId.systemDefault());
-			dashboardDto.getLogs().add(
-					LogDto.crea(file.getName(), file.length(), lastModified ));
+			logDtos.add(LogDto.crea(file.getName(), file.length(), lastModified ));
 		}
 		
-		// Load Summary
-		
-		dashboardDto.getSummary().add(SommarioDto.crea(totalThread + " threadMx trovati"));
-		dashboardDto.getSummary().add(SommarioDto.crea(logFiles.size() + " files logs trovati"));
-				
-		return dashboardDto;
-		
+		return logDtos;
 	}
 
 }

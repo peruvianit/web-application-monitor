@@ -11,6 +11,9 @@
 
     <title>Web Application Monitor</title>
 
+	<link rel="icon" type="image/png" href="webjars/application-monitor-ui/favicon-16x16.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="webjars/application-monitor-ui/favicon-32x32.png" sizes="32x32">
+
     <!-- Bootstrap Core CSS -->
     <link href="webjars/application-monitor-ui/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -48,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Web Application Monitor v1.0</a>
+                <a class="navbar-brand" href="index.html">Web Application Monitor v1.0.0</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -59,10 +62,7 @@
                         <i class="fa fa-connectdevelop fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
-                        <li><a id="link-credit" href="#"><i class="fa fa-keyboard-o fa-fw"></i> Credit</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a id="link-system" href="#"><i class="fa fa-desktop fa-fw"></i> System</a>
+                        <li><a id="link-system" href="#"><i class="fa fa-desktop fa-fw"></i> Info Application</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -75,7 +75,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                     </ul>
                 </div>
@@ -87,168 +87,23 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Thread MX - System</h1>
+                    <h2 id="page-header-title" class="page-header">Thread MX - </h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            
             <div class="row">
-                <div class="col-lg-2 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-star fa-3x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-12 text-left">
-                                	<div>NEW</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Dettaglio</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-cogs fa-3x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-12 text-left">
-                                	<div>RUNNABLE</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Dettaglio</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-ban fa-3x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-12 text-left">
-                                	<div>BLOCKED</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Dettaglio</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-pause fa-3x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-12 text-left">
-                                	<div>WAITING</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Dettaglio</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-clock-o fa-3x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-12 text-left">
-                                	<div>TIMED WAITING</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Dettaglio</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <div class="panel panel-gray">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-flag fa-3x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-12 text-left">
-                                	<div>TERMINATED</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Dettaglio</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+	            <div class="col-lg-12">
+	                <div class="well">
+	                    <h4>Thread Dump</h4>
+	                    <p><span id="info-server-host"></span>, <span id="info-server-thread"></span></p>
+	                </div>
+	            </div>
+            </div>
+            
+            <div class="row">
+            	<div id="info-thread"></div>
             </div>
             <!-- /.row -->
              <div class="row">
@@ -260,7 +115,6 @@
                         </div>
                         <div class="panel-body">
                             <div id="morris-donut-chart"></div>
-                            <a href="#" class="btn btn-default btn-block">Dettaglio</a>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -273,7 +127,6 @@
                         </div>
                         <div class="panel-body">
                             <div id="morris-donut-chart-deamon"></div>
-                            <a href="#" class="btn btn-default btn-block">Dettaglio</a>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -290,10 +143,9 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-striped" id="datable-log">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
                                             <th>Log name</th>
                                             <th>Size</th>
                                             <th>Last modified</th>
@@ -302,21 +154,18 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
                                             <td>localhost_access_log.2021-01-24.txt</td>
                                             <td>150kb</td>
                                             <td>29/01/2020</td>
                                             <td><i class="fa fa-download fa-fw"></i></td>
                                         </tr>
                                         <tr>
-                                            <td>2</td>
                                             <td>web-template-spring-boot-web.DESKTOP-DRDSLHR.log</td>
                                             <td>10kb</td>
                                             <td>29/01/2020</td>
                                             <td><i class="fa fa-download fa-fw"></i></td>
                                         </tr>
                                         <tr>
-                                            <td>3</td>
                                             <td>manager.2021-01-24.log</td>
                                             <td>1550kb</td>
                                             <td>29/01/2020</td>
@@ -339,15 +188,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-file fa-fw"></i> 3 File Logs
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-tumblr fa-fw"></i> 213 Threads
-                                    </span>
-                                </a>
+                            <div id="info-summary" class="list-group">
                             </div>
                             <!-- /.list-group -->
                         </div>
@@ -377,12 +218,63 @@
     <script src="webjars/application-monitor-ui/assets/vendor/morrisjs/morris.min.js"></script>
     <script src="webjars/application-monitor-ui/assets/data/morris-data.js"></script>
 
+	<!-- DataTables JavaScript -->
+    <script src="webjars/application-monitor-ui/assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="webjars/application-monitor-ui/assets/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="webjars/application-monitor-ui/assets/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    
     <!-- Custom Theme JavaScript -->
     <script src="webjars/application-monitor-ui/assets/dist/js/sb-admin-2.js"></script>
     
     <!-- Custom JavaScript Monitor application-->
-    <script src="webjars/application-monitor-ui/monitor-ui.js"></script>
+    <script src="webjars/application-monitor-ui/assets/js/monitor-dashboard.js"></script>
 
+	<!-- Modal -->
+      <div class="modal fade" id="modal-info-thread" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="myModalLabel"><div id="title-modal-thread-info"></div></h4>
+                  </div>
+                  <div class="modal-body">
+                      <pre><div id="content-modal-thread-info"></div></pre>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+              <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+      </div>
+   <!-- /.modal -->
+   
+   <!-- Modal -->
+      <div class="modal fade" id="modal-info-system" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="myModalLabel">Web Application Monitor</h4>
+                  </div>
+                  <div class="modal-body">
+                      <p>
+                      	<strong>State of all the threads of a Java process.</strong> The state of each thread is presented with a stack trace, showing the content of a thread's stack.
+                      </p>
+                      <p>
+                      Author: <a href="https://peruvianit.github.io/" target="_blank">Sergio Arellano {peruvianit}</a></br>
+                      Version: <strong>1.0.0</strong></p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+              <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+      </div>
+   <!-- /.modal -->
 </body>
 
 </html>

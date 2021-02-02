@@ -10,17 +10,15 @@ package io.peruvianit.monitor.dto;
 public class DonutGraphic {
 	private String label;
 	private Integer value;
-	private Float percentual;
 	
-	private DonutGraphic(String label, Integer value, Float percentual) {
+	private DonutGraphic(String label, Integer value) {
 		super();
 		this.label = label;
 		this.value = value;
-		this.percentual = percentual;
 	}
 	
-	public static DonutGraphic crea(String label, Integer value, Float percentual) {
-		return new DonutGraphic(label, value, percentual);
+	public static DonutGraphic crea(String label, Integer value) {
+		return new DonutGraphic(label, value);
 	}
 
 	public String getLabel() {
@@ -31,7 +29,4 @@ public class DonutGraphic {
 		return value;
 	}
 
-	public Float getPercentual() {
-		return percentual;
-	}
 }
