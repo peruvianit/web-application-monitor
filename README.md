@@ -70,6 +70,12 @@ List of endpoint (@RestController)
 | /io-peruvianit/monitor/thread-dump | simplified info of all Threads  |
 | /io-peruvianit/monitor/thread-dump | full info of all Threads |
 
+### Screen capture
+Dashboard
+[![monitor-ui](https://github.com/peruvianit/web-application-monitor/blob/release/1.0.0/document/images/monitor-ui.png)](https://#)
+
+Info Thread
+[![monitor-ui-info-thread](https://github.com/peruvianit/web-application-monitor/blob/release/1.0.0/document/images/monitor-ui-info-thread.png)](https://#)
 ### Todos
  
  - [ ] Detect DeadLock
