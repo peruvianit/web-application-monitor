@@ -3,7 +3,6 @@
  */
 package io.peruvianit.monitor.agent;
 
-import java.io.IOException;
 import java.lang.management.LockInfo;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MonitorInfo;
@@ -18,8 +17,8 @@ import io.peruvianit.monitor.agent.bean.ThreadInfoBean;
 import io.peruvianit.monitor.agent.bean.ThreadInfoBean.LockInfoBean;
 import io.peruvianit.monitor.agent.bean.ThreadInfoBean.LockerMonitorInfoBean;
 import io.peruvianit.monitor.agent.bean.ThreadInfoBean.StackTraceElementInfoBean;
-import io.peruvianit.monitor.agent.bean.ThreadInfoBean.StateThread;
 import io.peruvianit.monitor.agent.bean.ThreadInfoFullBean;
+import io.peruvianit.monitor.enums.StateThread;
 
 /**
  * @author Sergio Arellano {PeruViANit}
@@ -76,6 +75,7 @@ public class ThreadSystemMonitor {
 					theadInfoBean.setStateThread(StateThread.TERMINATED);
 					break;
 				default:
+					theadInfoBean.setStateThread(StateThread.WITHOUT_STATE);
 					break;
 				}
 				for (MonitorInfo mi : ti.getLockedMonitors()) {
@@ -111,7 +111,7 @@ public class ThreadSystemMonitor {
 		return theadInfoBeans;
 	}
   
-  public static List<ThreadInfoFullBean> dumpStack() throws IOException {
+  public static List<ThreadInfoFullBean> dumpStack() {
     ThreadMXBean mxBean = ManagementFactory.getThreadMXBean();
     ThreadInfo[] threadInfos = mxBean.getThreadInfo(mxBean.getAllThreadIds(), 0);
     Map<Long, ThreadInfo> threadInfoMap = new HashMap<>();
@@ -153,6 +153,7 @@ public class ThreadSystemMonitor {
 	    	threadInfoFullBean.setStateThread(StateThread.TERMINATED);
 	    	break;
 		  default:
+			threadInfoFullBean.setStateThread(StateThread.WITHOUT_STATE);
 			break;
 	    } 
 	    

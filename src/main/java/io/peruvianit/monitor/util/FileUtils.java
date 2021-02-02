@@ -1,6 +1,7 @@
 package io.peruvianit.monitor.util;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,5 +42,25 @@ public class FileUtils {
 	    	throw FileUtilsException.fileNotExists(pathFileName);
 	    }
 	    
+	}
+	
+	public static String getStringSizeLengthFile(long size) {
+
+	    DecimalFormat df = new DecimalFormat("0.00");
+
+	    float sizeKb = 1024.0f;
+	    float sizeMb = sizeKb * sizeKb;
+	    float sizeGb = sizeMb * sizeKb;
+	    float sizeTerra = sizeGb * sizeKb;
+
+
+	    if(size < sizeMb)
+	        return df.format(size / sizeKb)+ " Kb";
+	    else if(size < sizeGb)
+	        return df.format(size / sizeMb) + " Mb";
+	    else if(size < sizeTerra)
+	        return df.format(size / sizeGb) + " Gb";
+
+	    return "";
 	}
 }

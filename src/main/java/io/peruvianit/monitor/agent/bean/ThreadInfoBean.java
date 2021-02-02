@@ -6,6 +6,7 @@ package io.peruvianit.monitor.agent.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.peruvianit.monitor.enums.StateThread;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -16,7 +17,7 @@ import lombok.Data;
 @Data
 public class ThreadInfoBean {
 	
-	public enum StateThread{NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED}
+	//public enum StateThread{NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED}
 	
 	private String name;
 	private Long id;

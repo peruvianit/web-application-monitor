@@ -80,4 +80,21 @@
       </roles>
     </developer>
   </developers>
+  
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub peruvianit Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/peruvianit/web-application-monitor</url>
+    </repository>
+  </distributionManagement>
+  
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
 </project>
