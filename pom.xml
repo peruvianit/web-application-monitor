@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.0.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  
+  <groupId>io.peruvianit</groupId>
+  <artifactId>web-application-monitor</artifactId>
+  <version>1.0.0</version>
+  <name>web-application-monitor</name>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <com.lmax.disruptor>3.4.2</com.lmax.disruptor>
+    <lombok.version>1.18.8</lombok.version>
+    <commons-lang3.version>3.0</commons-lang3.version>
+  </properties>
+  
+  <dependencies>
+    <!-- SpringBoot -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    
+    <!-- Apache Library-->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    
+    <!-- Logging -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-log4j2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.lmax</groupId>
+      <artifactId>disruptor</artifactId>
+      <version>${com.lmax.disruptor}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-1.2-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-jcl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-jul</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-web</artifactId>
+    </dependency>
+    
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+  </dependencies>
+  
+  <developers>
+    <developer>
+      <id>peruvianit</id>
+      <name>Sergio Arellano {PerUViAn}</name>
+      <email>sergioarellanodiaz@gmail.com</email>
+      <timezone>UTC+01:00 (CET)</timezone>
+      <url>https://bit.ly/35dvXNW</url>
+      <roles>
+        <role>Full Stack Developer</role>
+      </roles>
+    </developer>
+  </developers>
+  
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub peruvianit Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/peruvianit/web-application-monitor</url>
+    </repository>
+  </distributionManagement>
+  
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+</project>
