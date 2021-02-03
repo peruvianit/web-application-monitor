@@ -48,6 +48,14 @@ dashboard.loadInfoServer = function(){
 		.catch(err => console.error(err));
 };
 
+dashboard.detectDeadLock = function(){
+	const url = "/web-template-spring-boot-web-2/io-peruvianit/monitor/dashboard/thread-mx/detect-deadlock/";
+	return fetch(url)
+		.then(response => response.json())
+		.then(data => data)
+		.catch(err => console.error(err));
+};
+
 dashboard.loadInfoThread = function(){
 	// Not used, info come into dashboard.loadThreadMx()
 	const url = "/web-template-spring-boot-web-2/io-peruvianit/monitor/thread-dump-fully/";
@@ -193,6 +201,15 @@ dashboard.addSummary = function (icon, message){
 	
 }
 
+async function renderInfoServer(){
+	console.log('start loading info server');
+	const infoServer = await dashboard.loadInfoServer();
+	console.log('loaded loading info server');
+	
+	document.getElementById("info-server-host").innerHTML = `Proccesed of the server <strong>${infoServer.hostname}</strong>, with the ip address <strong>${infoServer.ipAddress}</strong>`;
+	console.log(infoServer);
+} 
+
 async function renderThreadMx(){
 	console.log('start loading ThreadMx');
 	const threadMx = await dashboard.loadThreadMx();
@@ -219,13 +236,28 @@ async function renderThreadMx(){
 	
 } 
 
-async function renderInfoServer(){
-	console.log('start loading info server');
-	const infoServer = await dashboard.loadInfoServer();
-	console.log('loaded loading info server');
+async function renderDetectDeadLock(){
+	console.log('start loading detect deadlock');
+	const detectDeadlock = await dashboard.detectDeadLock();
 	
-	document.getElementById("info-server-host").innerHTML = `Proccesed of the server <strong>${infoServer.hostname}</strong>, with the ip address <strong>${infoServer.ipAddress}</strong>`;
-	console.log(loadInfoServer);
+	if (detectDeadlock != undefined && detectDeadlock.length > 0 ){
+		document.getElementById('count-thread-deadlock').innerHTML = detectDeadlock.length;
+		document.getElementById('message-deadlock').classList.remove('hidden')
+		
+		document.getElementById("title-modal-thread-info").innerHTML = `${detectDeadlock.length} deadlock`;
+		
+		document.getElementById('view-detail-deadlock').addEventListener('click', function(e){
+			let jsonString = JSON.stringify(detectDeadlock, undefined, 2)
+				
+			document.getElementById("content-modal-thread-info").innerHTML = jsonString;
+			$("#modal-info-thread").modal('show');
+		});
+	}
+		
+	console.log('loaded loading detect deadlock');
+	
+	
+	console.log(detectDeadlock);
 } 
 
 async function renderLogs(){
@@ -257,6 +289,7 @@ async function renderModalthreadInfo(stateThread){
 
 renderInfoServer();
 renderThreadMx();
+renderDetectDeadLock();
 renderLogs();
 
 document.getElementById("link-system").addEventListener('click', function(e){

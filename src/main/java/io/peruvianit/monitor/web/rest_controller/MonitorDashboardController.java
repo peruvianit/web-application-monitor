@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.peruvianit.monitor.agent.bean.ThreadInfoBean;
 import io.peruvianit.monitor.dto.LogDto;
 import io.peruvianit.monitor.dto.ServerInfoDto;
 import io.peruvianit.monitor.dto.ThreadMxDto;
@@ -25,6 +26,7 @@ public class MonitorDashboardController{
 	public static final String URL_BASE = "/io-peruvianit/monitor/dashboard/";
 	
 	public static final String URL_THREAD_MX = "thread-mx/";
+	public static final String URL_DETECT_DEAD_LOCK = "thread-mx/detect-deadlock/";
 	public static final String URL_LOGS = "logs/";
 	public static final String URL_INFO_SERVER = "info-server/";
 	
@@ -43,6 +45,11 @@ public class MonitorDashboardController{
 	@GetMapping(URL_THREAD_MX)
 	public ThreadMxDto loadThreadMx(){
 		return monitorService.loadThreadsMx();
+	}
+	
+	@GetMapping(URL_DETECT_DEAD_LOCK)
+	public List<ThreadInfoBean> detectDeadLock(){
+		return monitorService.detectDeadLock();
 	}
 	
 	@GetMapping(URL_LOGS)

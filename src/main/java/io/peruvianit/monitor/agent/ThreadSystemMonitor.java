@@ -33,79 +33,9 @@ public class ThreadSystemMonitor {
 
 		List<ThreadInfoBean> theadInfoBeans = new ArrayList<>();
 
-		for (ThreadInfo ti : threadInfos) {
-			ThreadInfoBean theadInfoBean = new ThreadInfoBean();
-			theadInfoBean.setName(ti.getThreadName());
-			theadInfoBean.setId(ti.getThreadId());
-			theadInfoBean.setLockName(ti.getLockName());
-			theadInfoBean.setLockOwnerName(ti.getLockOwnerName());
-			theadInfoBean.setLockOwnerId(ti.getLockOwnerId());
-
-			theadInfoBean.setSuspended(ti.isSuspended());
-			theadInfoBean.setInNative(ti.isInNative());
-
-			int i = 0;
-			StackTraceElement[] stackTrace = ti.getStackTrace();
-			for (; i < stackTrace.length; i++) {
-				StackTraceElement ste = stackTrace[i];
-
-				StackTraceElementInfoBean stackTraceElementInfoBean = new StackTraceElementInfoBean(ste.getClassName(),
-						ste.getMethodName(), ste.getFileName(), Integer.valueOf(ste.getLineNumber()));
-
-				theadInfoBean.getStackTraceElements().add(stackTraceElementInfoBean);
-
-				Thread.State ts = ti.getThreadState();
-				switch (ts) {
-				case NEW:
-					theadInfoBean.setStateThread(StateThread.NEW);
-					break;
-				case RUNNABLE:
-					theadInfoBean.setStateThread(StateThread.RUNNABLE);
-					break;
-				case BLOCKED:
-					theadInfoBean.setStateThread(StateThread.BLOCKED);
-					break;
-				case WAITING:
-					theadInfoBean.setStateThread(StateThread.WAITING);
-					break;
-				case TIMED_WAITING:
-					theadInfoBean.setStateThread(StateThread.TIMED_WAITING);
-					break;
-				case TERMINATED:
-					theadInfoBean.setStateThread(StateThread.TERMINATED);
-					break;
-				default:
-					theadInfoBean.setStateThread(StateThread.WITHOUT_STATE);
-					break;
-				}
-				for (MonitorInfo mi : ti.getLockedMonitors()) {
-					if (mi.getLockedStackDepth() == i) {
-						LockerMonitorInfoBean lockerMonitorInfoBean = new LockerMonitorInfoBean();
-
-						lockerMonitorInfoBean.setStackDepth(mi.getLockedStackDepth());
-						lockerMonitorInfoBean.setStackFrame(new StackTraceElementInfoBean(
-								mi.getLockedStackFrame().getClassName(), mi.getLockedStackFrame().getMethodName(),
-								mi.getLockedStackFrame().getFileName(), mi.getLockedStackFrame().getLineNumber()));
-
-						lockerMonitorInfoBean.setClassName(mi.getClassName());
-						lockerMonitorInfoBean.setIdentityHashCode(mi.getIdentityHashCode());
-
-						theadInfoBean.getLockerMonitors().add(lockerMonitorInfoBean);
-
-					}
-				}
-			}
-
-			LockInfo[] locks = ti.getLockedSynchronizers();
-			if (locks.length > 0) {
-				for (LockInfo li : locks) {
-					LockInfoBean lockInfoBean = new LockInfoBean(li.getClassName(),
-							Integer.valueOf(li.getIdentityHashCode()));
-					theadInfoBean.getLockInfos().add(lockInfoBean);
-				}
-			}
-
-			theadInfoBeans.add(theadInfoBean);
+		for (ThreadInfo threadInfo : threadInfos) {
+			theadInfoBeans.add(
+					convertTheadInfoBean(threadInfo));
 		}
 
 		return theadInfoBeans;
@@ -189,4 +119,95 @@ public class ThreadSystemMonitor {
 	return theadInfoFullBeans;
   }
   
+  public static List<ThreadInfoBean> detectDeadLock(){
+	ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+	long ids[] = threadMXBean.findMonitorDeadlockedThreads();
+	
+	List<ThreadInfoBean> theadInfoBeans = new ArrayList<>();
+	
+	if (ids != null) {
+		ThreadInfo threadInfos[] = threadMXBean.getThreadInfo(ids);
+		for (ThreadInfo threadInfo : threadInfos){
+			theadInfoBeans.add(
+					convertTheadInfoBean(threadInfo));
+		}
+	}
+	
+	return theadInfoBeans;	  
+  }
+  
+  private static ThreadInfoBean convertTheadInfoBean(ThreadInfo threadInfo) {
+	  ThreadInfoBean theadInfoBean = new ThreadInfoBean();
+		theadInfoBean.setName(threadInfo.getThreadName());
+		theadInfoBean.setId(threadInfo.getThreadId());
+		theadInfoBean.setLockName(threadInfo.getLockName());
+		theadInfoBean.setLockOwnerName(threadInfo.getLockOwnerName());
+		theadInfoBean.setLockOwnerId(threadInfo.getLockOwnerId());
+
+		theadInfoBean.setSuspended(threadInfo.isSuspended());
+		theadInfoBean.setInNative(threadInfo.isInNative());
+
+		int i = 0;
+		StackTraceElement[] stackTrace = threadInfo.getStackTrace();
+		for (; i < stackTrace.length; i++) {
+			StackTraceElement ste = stackTrace[i];
+
+			StackTraceElementInfoBean stackTraceElementInfoBean = new StackTraceElementInfoBean(ste.getClassName(),
+					ste.getMethodName(), ste.getFileName(), Integer.valueOf(ste.getLineNumber()));
+
+			theadInfoBean.getStackTraceElements().add(stackTraceElementInfoBean);
+
+			Thread.State ts = threadInfo.getThreadState();
+			switch (ts) {
+			case NEW:
+				theadInfoBean.setStateThread(StateThread.NEW);
+				break;
+			case RUNNABLE:
+				theadInfoBean.setStateThread(StateThread.RUNNABLE);
+				break;
+			case BLOCKED:
+				theadInfoBean.setStateThread(StateThread.BLOCKED);
+				break;
+			case WAITING:
+				theadInfoBean.setStateThread(StateThread.WAITING);
+				break;
+			case TIMED_WAITING:
+				theadInfoBean.setStateThread(StateThread.TIMED_WAITING);
+				break;
+			case TERMINATED:
+				theadInfoBean.setStateThread(StateThread.TERMINATED);
+				break;
+			default:
+				theadInfoBean.setStateThread(StateThread.WITHOUT_STATE);
+				break;
+			}
+			for (MonitorInfo mi : threadInfo.getLockedMonitors()) {
+				if (mi.getLockedStackDepth() == i) {
+					LockerMonitorInfoBean lockerMonitorInfoBean = new LockerMonitorInfoBean();
+
+					lockerMonitorInfoBean.setStackDepth(mi.getLockedStackDepth());
+					lockerMonitorInfoBean.setStackFrame(new StackTraceElementInfoBean(
+							mi.getLockedStackFrame().getClassName(), mi.getLockedStackFrame().getMethodName(),
+							mi.getLockedStackFrame().getFileName(), mi.getLockedStackFrame().getLineNumber()));
+
+					lockerMonitorInfoBean.setClassName(mi.getClassName());
+					lockerMonitorInfoBean.setIdentityHashCode(mi.getIdentityHashCode());
+
+					theadInfoBean.getLockerMonitors().add(lockerMonitorInfoBean);
+
+				}
+			}
+		}
+
+		LockInfo[] locks = threadInfo.getLockedSynchronizers();
+		if (locks.length > 0) {
+			for (LockInfo li : locks) {
+				LockInfoBean lockInfoBean = new LockInfoBean(li.getClassName(),
+						Integer.valueOf(li.getIdentityHashCode()));
+				theadInfoBean.getLockInfos().add(lockInfoBean);
+			}
+		}
+		
+		return theadInfoBean;
+  }
 }
