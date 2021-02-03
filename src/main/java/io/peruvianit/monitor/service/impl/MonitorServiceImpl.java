@@ -15,6 +15,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import io.peruvianit.monitor.agent.ThreadSystemMonitor;
+import io.peruvianit.monitor.agent.bean.ThreadInfoBean;
 import io.peruvianit.monitor.agent.bean.ThreadInfoFullBean;
 import io.peruvianit.monitor.dto.DonutGraphic;
 import io.peruvianit.monitor.dto.LogDto;
@@ -115,6 +116,11 @@ public class MonitorServiceImpl implements MonitorService {
 		}
 		
 		return logDtos;
+	}
+
+	@Override
+	public List<ThreadInfoBean> detectDeadLock() {
+		return ThreadSystemMonitor.detectDeadLock();
 	}
 
 }
