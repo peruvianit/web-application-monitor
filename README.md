@@ -1,4 +1,4 @@
-# Web Application Monitor 1.1.0
+# Web Application Monitor 1.1.1
 > java version : 1.8
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://#)
@@ -75,6 +75,10 @@ List of endpoint (@RestController)
 
   - [v1.1.0] Detect and show **Thread Deadlock**
 
+### Bugs
+
+  - [v1.1.1] Problem web-context into files javascript
+  
 ### Screen capture
 Dashboard
 
