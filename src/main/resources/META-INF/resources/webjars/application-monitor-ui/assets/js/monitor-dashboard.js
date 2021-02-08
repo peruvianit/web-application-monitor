@@ -25,7 +25,7 @@ dashboard.colorDaemon = function(){
 } 
 
 dashboard.loadThreadMx = function(){
-	const url = "/web-template-spring-boot-web-2/io-peruvianit/monitor/dashboard/thread-mx/";
+	const url = "io-peruvianit/monitor/dashboard/thread-mx/";
 	return fetch(url)
 		.then(response => response.json())
 		.then(data => data)
@@ -33,7 +33,7 @@ dashboard.loadThreadMx = function(){
 };
 
 dashboard.loadLogs = function(){
-	const url = "/web-template-spring-boot-web-2/io-peruvianit/monitor/dashboard/logs/";
+	const url = "io-peruvianit/monitor/dashboard/logs/";
 	return fetch(url)
 		.then(response => response.json())
 		.then(data => data)
@@ -41,7 +41,7 @@ dashboard.loadLogs = function(){
 };
 
 dashboard.loadInfoServer = function(){
-	const url = "/web-template-spring-boot-web-2/io-peruvianit/monitor/dashboard/info-server/";
+	const url = "io-peruvianit/monitor/dashboard/info-server/";
 	return fetch(url)
 		.then(response => response.json())
 		.then(data => data)
@@ -49,7 +49,7 @@ dashboard.loadInfoServer = function(){
 };
 
 dashboard.detectDeadLock = function(){
-	const url = "/web-template-spring-boot-web-2/io-peruvianit/monitor/dashboard/thread-mx/detect-deadlock/";
+	const url = "io-peruvianit/monitor/dashboard/thread-mx/detect-deadlock/";
 	return fetch(url)
 		.then(response => response.json())
 		.then(data => data)
@@ -58,7 +58,7 @@ dashboard.detectDeadLock = function(){
 
 dashboard.loadInfoThread = function(){
 	// Not used, info come into dashboard.loadThreadMx()
-	const url = "/web-template-spring-boot-web-2/io-peruvianit/monitor/thread-dump-fully/";
+	const url = "io-peruvianit/monitor/thread-dump-fully/";
 	return fetch(url)
 		.then(response => response.json())
 		.then(data => data)
